@@ -17,9 +17,9 @@ public class Main {
             getAllStudents();
             //should not add
             System.out.println("Adding student should not add successfully because of date \n");
-            addStudent("Rachel", "Stewart", "rachelstewart3@cmail.carleton.ca", "2021-13-01");
+            addStudent("Rose", "Salt", "rosesalt@cmail.carleton.ca", "2021-13-01");
             getAllStudents();
-            addStudent("Rachel", "Stewart", "rachelstewart3@cmail.carleton.ca", "2021-09-01");
+            addStudent("Rose", "Salt", "rosesalt@cmail.carleton.ca", "2021-09-01");
             getAllStudents();
             //should not update
             System.out.println("Updating student email should not update successfully because of duplicate email \n");
