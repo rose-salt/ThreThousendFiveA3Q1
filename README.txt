@@ -14,3 +14,5 @@ In ThreThousendFiveA3Q1/src/main/java/Main.java, change the Strings user and pas
 username and password associated with your PostgreSQL server.
 
 Hit the green run button to run the code and view the output in the console.
+
+Link to video: https://youtu.be/JDD5-vRGLyo
