@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class Main {
     public static Connection connection;
@@ -14,23 +15,69 @@ public class Main {
         try{
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, user, password);
-            getAllStudents();
-            //should not add
-            System.out.println("Adding student should not add successfully because of date \n");
-            addStudent("Rose", "Salt", "rosesalt@cmail.carleton.ca", "2021-13-01");
-            getAllStudents();
-            addStudent("Rose", "Salt", "rosesalt@cmail.carleton.ca", "2021-09-01");
-            getAllStudents();
-            //should not update
-            System.out.println("Updating student email should not update successfully because of duplicate email \n");
-            updateStudentEmail(2, "john.doe@example.com");
-            getAllStudents();
-            updateStudentEmail(2, "jane.smith@gmail.com");
-            getAllStudents();
-            addStudent("Suzie", "Q", "suzieq@cmail.carleton.ca", "2021-10-01");
-            getAllStudents();
-            deleteStudent(5);
-            getAllStudents();
+            Scanner scanner = new Scanner(System.in);
+            while(true)
+            {
+                System.out.println("What do you want to do?\n(1)Print all students\n(2)Add a student\n(3)Update a student\n(4)Delete a student\n(0)Exit\n");
+                System.out.print("Enter your selection:");
+                String choice = scanner.nextLine();
+                if(choice.equals("1"))
+                {
+                    getAllStudents();
+                }
+                else if(choice.equals("2"))
+                {
+                    System.out.print("Enter first name:");
+                    String f_name = scanner.nextLine();
+                    System.out.print("Enter last name:");
+                    String l_name = scanner.nextLine();
+                    System.out.print("Enter email:");
+                    String email = scanner.nextLine();
+                    System.out.print("Enter enrollment date (YYYY-MM-DD):");
+                    String date = scanner.nextLine();
+                    addStudent(f_name, l_name, email, date);
+                }
+                else if(choice.equals("3"))
+                {
+                    int id;
+                    while(true) {
+                        System.out.print("Enter student id:");
+                        try {
+                            id = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid must be integer");
+                        }
+                    }
+                    System.out.print("Enter email:");
+
+                    String email = scanner.nextLine();
+                    updateStudentEmail(id, email);
+                }
+                else if(choice.equals("4"))
+                {
+                    int id;
+                    while(true) {
+                        System.out.print("Enter student id:");
+                        try {
+                            id = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid must be integer");
+                        }
+                    }
+                    deleteStudent(id);
+                }
+                else if(choice.equals("0"))
+                {
+                    System.out.println("Exiting");
+                    break;
+                }
+                else
+                {
+                    System.out.println("ERROR: Invalid choice");
+                }
+            }
         }
         catch(Exception e){
             System.out.println(e.getMessage()+ "\n");
